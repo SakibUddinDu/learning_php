@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Notifications\PostCreated;
 use Illuminate\Http\Request;
 use Flasher\Prime\FlasherInterface;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -24,8 +26,10 @@ class PostController extends Controller
         $post->title =$request->title;
         $post->date=now();
         $post->content =$request->content;
-
         $post->save();
+
+        $user =Auth::user();
+        $user->notify(new PostCreated($post));
         $flasher->addSuccess('Book saved successfully');
 
         // return "post is Saved"." ". $post->id;

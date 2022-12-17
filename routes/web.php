@@ -3,6 +3,8 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Post;
+// use App\Notifications\PostCreated;
+// use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +56,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/delete-post/{id}', [PostController::class, 'delete'])->name('deletePost');
     
+    // Route::get('/notification',function(){
+    //     $user =Auth::user();
+    //     $user->notify(new PostCreated());
+
+    //     return "ok";
+    // });
+
 });
 
 require __DIR__.'/auth.php';
