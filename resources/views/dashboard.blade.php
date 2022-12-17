@@ -21,11 +21,16 @@
             <input
                 type="text"
                 name="title"
-               
+                @error('title') @else border-gray-200 @enderror
                 class="h-14 w-60 pl-5 pr-5 rounded-lg focus:shadow focus:outline-none block"
                 value="{{old('title')}}"
                 placeholder="Post Title..."
             />
+            @error('title')
+                <span class="text-red-500 text-sm">
+                {{$message}}
+                </span>
+            @enderror
             <textarea class="my-4" name="content" id="" cols="50" rows="8"> {{old('content')}} </textarea>
             {{-- <div class="absolute top-2 right-2"> --}}
             <div class="">
@@ -40,16 +45,23 @@
             
     </form>
 
-    <div class="posts">
+    <div class="posts p-5">
         <h2>Posts</h2>
      
             @foreach ($postgulu as $post)
-            <div class="border-2  border-indigo-900 p-4">
+            <div class="border-2  border-indigo-600 p-4 mt-5">
                 <h3 class="text-2xl">
-                    <a href="show.html">{{$post->title}}</a>
+                    <a href="">{{$post->title}}</a>
                 </h3>
-                <div class="text-xl font-bold mb-4">{{$post->content}}</div>
-                
+                <p class="text-xl font-bold mb-4">{{$post->content}}</p>
+                <a href="{{route('editPost',$post->id)}}">
+                    <button class="h-5 w-12 text-white rounded-full bg-red-500 hover:bg-red-600" type="submit">Edit</button>
+                </a>
+                <form method="post" action="{{route('deletePost',$post->id)}}">
+                    @csrf
+                    <button class="h-5 w-12 text-white rounded-full bg-red-500 hover:bg-red-600" type="submit">Delete</button>         
+                </form>
+
                 
             </div>
                 {{-- <li>{{$post->title}}</li>   --}}

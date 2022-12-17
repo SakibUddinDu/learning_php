@@ -45,7 +45,14 @@ Route::middleware('auth')->group(function () {
 
     // add post : add method
     Route::post('/add-post', [PostController::class, 'add'])->name('add-post');
+
     Route::get('/posts', [PostController::class, 'index'])->name('postgulu');
+
+    Route::get('/edit-post/{id}', [PostController::class, 'edit'])->name('editPost');
+
+    Route::post('/update-post/{id}', [PostController::class, 'update'])->name('updatePost');
+
+    Route::post('/delete-post/{id}', [PostController::class, 'delete'])->name('deletePost');
     
 });
 

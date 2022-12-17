@@ -1,12 +1,22 @@
+{{-- <h1>Edit</h1> --}}
+{{-- <x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h1>Edit</h1>
+        </h2>
+    </x-slot>
+
+    
+</x-app-layout> --}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-           Edit Post 
+           Edit Post {{-- {{ __('items') }} --}}
         </h2>
     </x-slot>
     <div class="container mx-auto">
         <div class="bg-white my-6 p-6">
-            <form  action="" method="post">
+            <form  action="{{route('updatePost', $post->id)}}" method="post">
                 @csrf
                 <div>
                     <input
@@ -16,13 +26,14 @@
                         value="{{old('title')}}"
                         placeholder="Post Title..."
                     />
-                    
-                    <div class="">
+                    <textarea class="my-4" name="content" id="" cols="50" rows="8"> {{old('content')}} </textarea>
+                    {{-- <div class="absolute top-2 right-2"> --}}
+                    <div class="mt-4">
                         <button
                             type="submit"
                             class="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600"
                         >
-                            Post
+                            Update
                         </button>
                     </div>
                 </div>
@@ -30,4 +41,5 @@
             </form> 
         </div>
     </div>
+    {{-- <h3>{{$post ->title}}</h3> --}}
 </x-app-layout>
